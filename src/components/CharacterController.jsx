@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { MathUtils, Vector3 } from "three";
 import { degToRad } from "three/src/math/MathUtils.js";
 import { Character } from "./Character";
+import { Kris } from "./Kris1";
 
 const normalizeAngle = (angle) => {
   while (angle > Math.PI) angle -= 2 * Math.PI;
@@ -133,8 +134,9 @@ export const CharacterController = () => {
         } else {
           setAnimation("walk");
         }
+        
       } else {
-        setAnimation("idle");
+        setAnimation("dance2");
       }
       character.current.rotation.y = lerpAngle(
         character.current.rotation.y,
@@ -167,12 +169,12 @@ export const CharacterController = () => {
     <RigidBody colliders={false} lockRotations ref={rb}>
       <group ref={container}>
         <group ref={cameraTarget} position-z={1.5} />
-        <group ref={cameraPosition} position-y={4} position-z={-4} />
+        <group ref={cameraPosition} position-y={2} position-z={-4} />
         <group ref={character}>
-          <Character scale={0.18} position-y={-0.25} animation={animation} />
+          <Kris scale={50} position-y={-0.25} animation={animation} />
         </group>
       </group>
-      <CapsuleCollider args={[0.08, 0.15]} />
+      <CapsuleCollider args={[0.04, 0.24]} />
     </RigidBody>
   );
 };

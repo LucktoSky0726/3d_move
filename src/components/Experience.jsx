@@ -5,8 +5,9 @@ import { useRef } from "react";
 import { CapsuleCollider, RigidBody } from "@react-three/rapier";
 
 import { CharacterController } from "./CharacterController";
-import {Frozen} from './Frozen'
+import { Frozen } from "./Frozen";
 import { Map } from "./Map";
+import { Kris } from "./Kris";
 
 const maps = {
   // castle_on_hills: {
@@ -23,7 +24,7 @@ const maps = {
   // },
   de_dust_2_with_real_light: {
     scale: 0.3,
-    position: [-5, -3, 13],
+    position: [-6, -3, 13],
   },
   // medieval_fantasy_book: {
   //   scale: 0.4,
@@ -63,7 +64,7 @@ export const Experience = () => {
           attach={"shadow-camera"}
         />
       </directionalLight>
-      <Physics key={map}>
+      <Physics key={map} debug>
         <Map
           scale={maps[map].scale}
           position={maps[map].position}
@@ -71,14 +72,23 @@ export const Experience = () => {
         />
         <CharacterController />
         <RigidBody colliders={false} lockRotations ref={rb1}>
-        <group ref={character}>
-
-          <Frozen scale={0.15} position-y={-1} position-x={1.5} position-z={1.3} />
+          <group ref={character}>
+            <Frozen
+              scale={0.12}
+              position-y={-1}
+              position-x={0.5}
+              position-z={1.3}
+            />
           </group>
-          <CapsuleCollider args={[0.8, 0.15]} />
-
-        </RigidBody>  
-    
+          <CapsuleCollider args={[0.3, 0.15]} position={[1.35, -1.2, 1.35]}/>
+        </RigidBody>
+        {/* <Kris
+          animation = {"idle"}
+              scale={50}
+              position-y={-1}
+              position-x={1.5}
+              position-z={1.3}
+            /> */}
       </Physics>
     </>
   );
